@@ -47,6 +47,14 @@ To sign a user in at launch without typing:
 RP_AUTO_USER=sam sdks/ios/Example/scripts/configure.sh
 ```
 
+To try opening the app from a share link, wrap the link (a simulator on localhost cannot receive universal links):
+
+```bash
+xcrun simctl openurl booted "rpswift://link?url=http%3A%2F%2Flocalhost%3A3003%2F<handle>%2Ft%2F<CODE>"
+```
+
+Seed with another template to try other screens, for example `seed:playground milestones` for one with Messages, WhatsApp and Copy link buttons.
+
 In the Fixtures tab, a code starting with `OK` is accepted by the code field, and anything else is refused.
 
 Apple's offer code sheet opens in the simulator but stays empty, because the simulator has no App Store account.
