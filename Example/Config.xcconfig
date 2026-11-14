@@ -1,0 +1,9 @@
+// Defaults for the sample app. `scripts/configure.sh` writes Local.xcconfig with a sandbox
+// public key for the local backend. Without it the Screen and Custom tabs say so, and the
+// Fixtures tab still works.
+RP_API_KEY =
+RP_API_URL = http:/$()/localhost:3002
+RP_LINK_HOST = localhost
+RP_AUTO_USER =
+
+#include? "Local.xcconfig"

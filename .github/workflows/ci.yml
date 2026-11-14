@@ -1,0 +1,22 @@
+name: CI
+
+# Builds for iOS and runs the tests on a Mac. The same tests run on Linux in the repository
+# this code is developed in.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: macos-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - run: swift test
+      - name: Build for iOS
+        run: xcodebuild -scheme ReferralPandaUI -destination 'generic/platform=iOS Simulator' build

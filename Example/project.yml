@@ -1,0 +1,55 @@
+name: ReferralPandaPlayground
+options:
+  bundleIdPrefix: com.referralpanda
+  deploymentTarget:
+    iOS: '15.0'
+  createIntermediateGroups: true
+configFiles:
+  Debug: Config.xcconfig
+  Release: Config.xcconfig
+packages:
+  ReferralPanda:
+    path: ..
+targets:
+  Playground:
+    type: application
+    platform: iOS
+    sources:
+      - path: App
+      # The shared conformance fixtures, for the Fixtures tab.
+      - path: ../Tests/Fixtures/expected
+        type: folder
+        buildPhase: resources
+    dependencies:
+      - package: ReferralPanda
+        product: ReferralPanda
+      - package: ReferralPanda
+        product: ReferralPandaUI
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.referralpanda.playground.swift
+        PRODUCT_NAME: Playground
+        MARKETING_VERSION: 0.1.0
+        CURRENT_PROJECT_VERSION: 1
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        TARGETED_DEVICE_FAMILY: '1'
+        CODE_SIGNING_ALLOWED: NO
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: RP Swift
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        # The local backend is plain http on this Mac.
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true
+        # So the app can tell whether WhatsApp is there before trying it.
+        LSApplicationQueriesSchemes: [whatsapp]
+        # Stands in for a universal link on a simulator: rpswift://link?url=<a share link>.
+        CFBundleURLTypes:
+          - CFBundleURLName: com.referralpanda.playground.swift
+            CFBundleURLSchemes: [rpswift]
+        RPAPIKey: $(RP_API_KEY)
+        RPAPIURL: $(RP_API_URL)
+        RPLinkHost: $(RP_LINK_HOST)
+        RPAutoUser: $(RP_AUTO_USER)
